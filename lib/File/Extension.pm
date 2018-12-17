@@ -3,6 +3,9 @@ package File::Extension;
 use strict;
 use warnings FATAL => 'all';
 
+
+our $VERSION = '0.020';
+
 # populated in BEGIN block
 my %ext;
 
@@ -16,15 +19,28 @@ sub extplain {
   return $ext{$extension};
 }
 
+
+sub filter_by_meta {
+  my $query = shift;
+
+  my %filtered;
+
+  while(my($extension, $desc) = each(%ext)) {
+    if($desc =~ m/$query/i) {
+      $filtered{$extension} = $desc;
+    }
+  }
+  return \%filtered;
+}
+
 #< begin
 BEGIN {
   use Exporter;
-  use vars qw($VERSION @ISA @EXPORT_OK %EXPORT_TAGS);
+  use vars qw(@ISA @EXPORT_OK %EXPORT_TAGS);
   @ISA = qw(Exporter);
 
-  $VERSION = '0.004';
 
-  @EXPORT_OK = qw(extplain);
+  @EXPORT_OK = qw(extplain filter_by_meta);
 
   %ext = (
     '!bt'          => 'BitTorrent Incomplete Download File',
@@ -8359,13 +8375,15 @@ File::Extension - explain file extensions
 
 =head1 SYNOPSIS
 
-      use File::Extension qw(extplain);
+      use File::Extension qw(extplain filter_by_meta);
 
       my @filetypes = qw(nes pl pm gb p6);
 
       for my $what(@filetypes) {
         printf("%s is a %s\n", $what, extplain($what));
       }
+
+      my $document_extensions = filter_by_meta('doc');
 
 =head1 DESCRIPTION
 
@@ -8390,6 +8408,17 @@ Parameters: $file_extension
 Returns:    $explanation
 
   my $explanation = extplain('nes'); # Nintendo (NES) ROM File
+
+
+=head2 filter_by_meta()
+
+Parameters: $extension
+
+Returns:    \%filtered
+
+  my $results = filter_by_meta('doc');
+
+Filters the hash by a raw string or regular expression, returning the results.
 
 =head1 HISTORY
 
