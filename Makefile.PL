@@ -20,13 +20,6 @@ WriteMakefile1(
   ],
   PREREQ_PM                    => {
   },
-  META_ADD                     => {
-    provides => {
-      'File::Extension' => {
-        file => 'lib/File/Extension.pm',
-      },
-    },
-  },
   MAN1PODS                     => { },
   dist                         => { COMPRESS => q{gzip -9f},    SUFFIX => q{gz}, },
   clean                        => { FILES    => q{},                  },
