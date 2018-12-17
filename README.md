@@ -6,13 +6,15 @@ File::Extension - explain file extensions
 
 # SYNOPSIS
 
-      use File::Extension qw(extplain);
+      use File::Extension qw(extplain filter_by_meta);
 
       my @filetypes = qw(nes pl pm gb p6);
 
       for my $what(@filetypes) {
         printf("%s is a %s\n", $what, extplain($what));
       }
+
+      my $document_extensions = filter_by_meta('doc');
 
 # DESCRIPTION
 
@@ -37,6 +39,16 @@ Parameters: $file\_extension
 Returns:    $explanation
 
     my $explanation = extplain('nes'); # Nintendo (NES) ROM File
+
+## filter\_by\_meta()
+
+Parameters: $extension
+
+Returns:    \\%filtered
+
+    my $results = filter_by_meta('doc');
+
+Filters the hash by a raw string or regular expression, returning the results.
 
 # HISTORY
 

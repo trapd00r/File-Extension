@@ -6,4 +6,5 @@ t/021-synopsis.t
 t/02-pod-coverage.t
 t/03-extension.t
 scripts/extplain
+scripts/filter
 Makefile.PL
