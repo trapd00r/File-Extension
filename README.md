@@ -6,7 +6,7 @@ File::Extension - explain file extensions
 
 # SYNOPSIS
 
-      use File::Extension qw(extplain filter_by_meta);
+      use File::Extension qw(extplain filter_by_meta filter_by_meta_reverse);
 
       my @filetypes = qw(nes pl pm gb p6);
 
@@ -42,7 +42,7 @@ Returns:    $explanation
 
 ## filter\_by\_meta()
 
-Parameters: $extension
+Parameters: $filter
 
 Returns:    \\%filtered
 
@@ -50,12 +50,23 @@ Returns:    \\%filtered
 
 Filters the hash by a raw string or regular expression, returning the results.
 
+## filter\_by\_meta\_reverse()
+
+Parameters: $filter
+
+Returns:    \\%filtered
+
+    my $results = filter_by_meta_reverse('doc');
+
+Like filter\_by\_meta(), but returns the results that does not match the
+given filter.
+
 # HISTORY
 
 This module was initially crafted while exploring ideas for generating
 the world's largest LS\_COLORS file:
 
-["https://github.com/trapd00r/LS\_COLORS/issues/112"](#https-github-com-trapd00r-ls_colors-issues-112)
+[https://github.com/trapd00r/LS\_COLORS/issues/112](https://github.com/trapd00r/LS_COLORS/issues/112)
 
 # SEE ALSO
 
